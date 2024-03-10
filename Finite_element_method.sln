@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Interpolation_polynom", "Interpolation_polynom\Interpolation_polynom.pyproj", "{FE540D2D-6DAC-4407-A722-9168165E482D}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "tension-compression of elastic rods", "tension-compression of elastic rods\tension-compression of elastic rods.pyproj", "{985F2BF4-A753-48E4-88D8-09E6042C0E6F}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Euler–Bernoulli beam", "Euler–Bernoulli beam\Euler–Bernoulli beam.pyproj", "{051E36AA-5675-4725-A004-CBAEA914A9F3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FE540D2D-6DAC-4407-A722-9168165E482D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE540D2D-6DAC-4407-A722-9168165E482D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{985F2BF4-A753-48E4-88D8-09E6042C0E6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{985F2BF4-A753-48E4-88D8-09E6042C0E6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{051E36AA-5675-4725-A004-CBAEA914A9F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{051E36AA-5675-4725-A004-CBAEA914A9F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {64628C7C-3FB9-4DE8-86E0-2A4C557AB3A4}
+	EndGlobalSection
+EndGlobal
