@@ -60,7 +60,7 @@ l = L / elements_num # длина конечных элементов балки
 
 
 def calc_deflection(u):
-    xsi = np.linspace(-1, 1)
+    xsi = np.array[-1, 1]
     ni = 1 / 4 * (1 - xsi) ** 2 * (2 + xsi)
     ni_theta = 1 / 8 * l * (1 - xsi) ** 2 * (1 + xsi)
     nj = 1 / 4 * (1 + xsi) ** 2 * (2 - xsi)
