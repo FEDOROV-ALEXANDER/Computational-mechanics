@@ -4,7 +4,7 @@ import meshio
 import matplotlib as plt
 import pandas as pd 
 
-def calc_deflection(u):
+def calc_deflection(u, l):
     xsi = np.arange(-1, 1, 2)
     ni = 1 / 4 * (1 - xsi) ** 2 * (2 + xsi)
     ni_theta = 1 / 8 * l * (1 - xsi) ** 2 * (1 + xsi)
@@ -63,33 +63,13 @@ class Forse:
     #тут в идеале добавить для распределнной нагрузки и мб еще что-то, пока хз
         return F
 
-def save_data(U,F, elements, nodes): 
+def save_data(U, F,  M,  x): 
 
-    Ux = np.zeros(len(U)//2)
-    Uy = np.zeros(len(U)//2)
-    j = 0
-    k = 0
+    data_result = pd.DataFrame({'Coordinate, m' : x,   'Displacements Y, mm' : U, 'Forses, kN' : F, 'Moments kN*m': M})
+    with pd.ExcelWriter(r"C:\Users\Alexander\source\Учеба\3 курс\Вычислительная механика\МКЭ\Finite_element_method\Euler–Bernoulli beam\Bending.xlsx") as writer:
+        data_result.to_excel(writer, sheet_name ="Python", index = "False")
 
-    for i in range(len(U)):
-        if i%2 == 0:
-            Ux[j] = U[i]
-            j += 1
-        else:
-            Uy[k] = U[i]
-            k += 1
-
-    displacement = np.zeros((len(nodes), 2))
-    displacement[:, 0] = Ux
-    displacement[:, 1] = Uy
-    forces = np.zeros((len(elements), 1)) 
-    forces[:, 0] = F
-
-    data_forces = pd.DataFrame(forces, index=elements ,columns=[ "Сила, Н"]) 
-    data_displacemet = pd.DataFrame(displacement, index = nodes,  columns =[ "Ux, м", "Uy, м"] )
-    data_displacemet.index.name = "Номер шарнира"
-    data_forces.index.name = "Номер стержня"
-    data_displacemet.to_excel(r'C:\Users\Alexander\source\Учеба\3 курс\Вычислительная механика\МКЭ\Finite_element_method\Euler–Bernoulli beam\Bending.xlsx') 
-    data_forces.to_excel(r'C:\Users\Alexander\source\Учеба\3 курс\Вычислительная механика\МКЭ\Finite_element_method\Euler–Bernoulli beam\Bending.xlsx')
+   
 
 
 
@@ -99,9 +79,6 @@ def J():
 
 
 def mesh():
-    return
-
-def save_data():
     return
 
 

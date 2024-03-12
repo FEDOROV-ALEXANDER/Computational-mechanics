@@ -4,8 +4,9 @@ import array
 import module1 as m
 
 
+
 #enter data 
-# TODO: найти сове значение J. 
+# TODO: найти свое значение J. 
 L = 1 # meter 
 M = 1e4
 E = 2e11
@@ -27,42 +28,45 @@ k = E * J / l ** 3 * np.array([[12, 6 * l, -12, 6 * l],
                             [6 * l, 4 * l * l, -6 * l, 2 * l * l],
                             [-12, -6 * l, 12, -6 * l],
                             [6 * l, 2 * l * l, -6 * l, 4 * l * l]])
-
+#creating global rigidity matrix 
 for i in range(element_numbers): 
     sub = [2 * i, 2 * i + 1, 2 * i + 2, 2 * i + 3]
     K[np.ix_(sub, sub)] += k
 
-# forses and moments
-F = np.zeros((2 * element_numbers + 2))
- 
-
-
-loaded = m.Forse(1, "moment", M)
-F  = loaded.loading(F)
-
 right = m.Boundary(number = 21, type = "clamped")
 K = right.boundary_conditions(K)
 
+# forses and moments
+F = np.zeros((2 * element_numbers + 2))
+ 
+loaded = m.Forse(1, "moment", M)
+F  = loaded.loading(F)
+
+
+#solution of the basic equation 
 U = np.linalg.solve(K, F)
 
 
 
-
+#вывод данных (функции которые здесь используются просто взяты и пособия,
+# в принципе можно было и основным уравнением МКЭ для элемента тоже самое получить)
 x = np.linspace(0, 1, element_numbers)
 vs = []
 moments = []
 forces = []
-vs.extend(m.calc_deflection(U[0:4]))
+vs.extend(m.calc_deflection(U[0:4], l))
 forces.append(-E * J * m.calc_force(U[0:4]))
 moments.extend(-E * J * m.calc_curvature(U[0:4]))
 for i in range(2, U.shape[0] - 2, 2):
-    vs.extend(m.calc_deflection(U[i:i + 4]))
+    vs.extend(m.calc_deflection(U[i:i + 4], l))
     moments.extend(-E * J * m.calc_curvature(U[i:i + 4]))
     forces.append(-E * J * m.calc_force(U[i:i + 4]))
 
 Moments = array.array('f', moments)
-for i in range(element_numbers):
-    print(x[i], Moments[i])
+
+m.save_data(vs, forces, Moments, x)
+
+
 
 
 # TODO:  Добавить сохранение данных в таблице и графики
