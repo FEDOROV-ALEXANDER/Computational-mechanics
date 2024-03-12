@@ -1,4 +1,5 @@
-﻿import matplotlib.pyplot as plt
+﻿from xml.dom.minidom import Element
+import matplotlib.pyplot as plt
 import numpy as np
 import array
 import module1 as m
@@ -15,7 +16,7 @@ J = 1.63e-6#9.0625
 
 # TODO: попробывать сделать автоматический выбор размера элемента
 #number of elements 
-element_numbers = 10
+element_numbers = 20
 #global rigidity matrix 
 K = np.zeros(((2 * element_numbers + 2), (2 * element_numbers + 2)))
 
@@ -33,65 +34,50 @@ for i in range(element_numbers):
     sub = [2 * i, 2 * i + 1, 2 * i + 2, 2 * i + 3]
     K[np.ix_(sub, sub)] += k
 
-#bounded_node = 11
+
+#right = m.Boundary(number = 21, type = "pinned")
+#K = right.boundary_conditions(K)
 
 
-##K[2 * bounded_node - 2][:] = 0
-#K[:][2 * bounded_node - 2] = 0 
+#left = m.Boundary(number = 1, type = "pinned")
+#K = left.boundary_conditions(K)
 
-#K[2 * bounded_node - 2][2 * bounded_node - 2] = 1 
-#bounded_node = 1
-
-#bounded_node  = 1
-#K[2 * bounded_node - 2][:] = 0
-#K[:][2 * bounded_node - 2] = 0 
-
-#K[2 * bounded_node - 2][2 * bounded_node - 2] = 1 
-#L = K
-#print(np.linalg.det(L))
-
-right = m.Boundary(number = 11, type = "pinned")
+right = m.Boundary(number = 21, type = "clamped")
 K = right.boundary_conditions(K)
-
-
-left = m.Boundary(number = 1, type = "pinned")
-K = left.boundary_conditions(K)
 
 # forses and moments
 F = np.zeros((2 * element_numbers + 2))
  
-#loaded = m.Forse(1, "concentrated force", M)
-#F  = loaded.loading(F)
-F[ 2 * 5 - 2] = -1e4
+loaded = m.Forse(1, "moment", 1e4)
+F  = loaded.loading(F)
+#F[ 2 * 6 - 2] = -1e4
 
 
 #solution of the basic equation 
 U = np.linalg.solve(K, F)
 
+x = np.linspace(0, 1, element_numbers + 1)
 
 
-#вывод данных (функции которые здесь используются просто взяты и пособия,
-# в принципе можно было и основным уравнением МКЭ для элемента тоже самое получить)
-x = np.linspace(0, 1, element_numbers)
-vs = []
-moments = []
-forces = []
-vs.extend(m.calc_deflection(U[0:4], l))
-forces.append(-E * J * m.calc_force(U[0:4], l))
-moments.extend(-E * J * m.calc_curvature(U[0:4], l))
-for i in range(2, U.shape[0] - 2, 2):
-    vs.extend(m.calc_deflection(U[i:i + 4], l))
-    moments.extend(-E * J * m.calc_curvature(U[i:i + 4], l))
-    forces.append(-E * J * m.calc_force(U[i:i + 4], l))
+Moments = np.zeros(element_numbers + 1)
+Forces = np.zeros(element_numbers + 1)
+Displacements = U[0 : U.shape[0] - 1 : 2]
+for i in  range(element_numbers ):
+    u = U[2 * i: 2 * i + 4]
+    f = np.matmul(k, u)
+    Moments[i]  = f[1]
+    Forces[i] = f[0]
+    Forces[i + 1] = f[2]
+    Moments[i + 1] = f[3]
+
+Forces[-1] *=-1
+Moments[-1] *=-1
+Forces = np.round(Forces, 6)
+Moments =  -np.round(Moments, 6)
 
 
-Moments = array.array('f', moments)
-Forces = array.array('f', forces)
-Displacements = array.array('f', vs)
-
-
-for i in range(element_numbers):
-    print(x[i],"   ",  Moments[i],"  ",  Forces[i], "  ", Displacements[i], "   ", forces[i])
+for i in range(element_numbers + 1):
+    print(x[i],"   ",  Moments[i],"  ",  Forces[i], "  ", Displacements[i])
 m.save_data(Displacements, Forces, Moments, x)
 
 
