@@ -65,7 +65,7 @@ class Forse:
 
 def save_data(U, F,  M,  x): 
 
-    data_result = pd.DataFrame({'Coordinate, m' : x,   'Displacements Y, mm' : U, 'Forses, kN' : F, 'Moments kN*m': M})
+    data_result = pd.DataFrame({'Coordinate, m' : x,   'Displacements Y, mm' : U, 'Forses, N' : F, 'Moments N*m': M})
     with pd.ExcelWriter(r"C:\Users\Alexander\source\Учеба\3 курс\Вычислительная механика\МКЭ\Finite_element_method\Euler–Bernoulli beam\Bending.xlsx") as writer:
         data_result.to_excel(writer, sheet_name ="Python", index = "False")
 

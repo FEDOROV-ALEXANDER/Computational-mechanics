@@ -12,11 +12,11 @@ L = 1 # meter
 M = 1e4
 E = 2e11
 J = 1.63e-6#9.0625
-
+J = 0.90625e-6
 
 # TODO: попробывать сделать автоматический выбор размера элемента
 #number of elements 
-element_numbers = 20
+element_numbers = 100
 #global rigidity matrix 
 K = np.zeros(((2 * element_numbers + 2), (2 * element_numbers + 2)))
 
@@ -35,20 +35,20 @@ for i in range(element_numbers):
     K[np.ix_(sub, sub)] += k
 
 
-#right = m.Boundary(number = 21, type = "pinned")
-#K = right.boundary_conditions(K)
-
-
-#left = m.Boundary(number = 1, type = "pinned")
-#K = left.boundary_conditions(K)
-
-right = m.Boundary(number = 21, type = "clamped")
+right = m.Boundary(number = 101, type = "pinned")
 K = right.boundary_conditions(K)
+
+
+left = m.Boundary(number = 1, type = "pinned")
+K = left.boundary_conditions(K)
+
+#right = m.Boundary(number = 21, type = "clamped")
+#K = right.boundary_conditions(K)
 
 # forses and moments
 F = np.zeros((2 * element_numbers + 2))
  
-loaded = m.Forse(1, "moment", 1e4)
+loaded = m.Forse(26, "moment", -1e4)
 F  = loaded.loading(F)
 #F[ 2 * 6 - 2] = -1e4
 
@@ -72,10 +72,10 @@ for i in  range(element_numbers ):
 
 Forces[-1] *=-1
 Moments[-1] *=-1
-Forces = np.round(Forces, 6)
-Moments =  -np.round(Moments, 6)
+Forces = np.round(Forces, 5)
+Moments =  -np.round(Moments, 5)
 
-
+x *= 1000
 for i in range(element_numbers + 1):
     print(x[i],"   ",  Moments[i],"  ",  Forces[i], "  ", Displacements[i])
 m.save_data(Displacements, Forces, Moments, x)
@@ -84,6 +84,7 @@ m.save_data(Displacements, Forces, Moments, x)
 
 
 # TODO:  Добавить сохранение данных в таблице и графики
+
 plt.figure()
 plt.plot(x, Moments) 
 plt.xlabel("координата, м")
