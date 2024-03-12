@@ -15,13 +15,13 @@ def calc_deflection(u, l):
     return v
 
 
-def calc_curvature(u):
+def calc_curvature(u, l):
     xsi = np.arange(-1, 1, 2)
     b = 1 / l * np.array([6 * xsi / l, 3 * xsi - 1, -6 * xsi / l, 3 * xsi + 1])
     return b.T.dot(u)
 
 
-def calc_force(u):
+def calc_force(u, l):
     b = 1 / l * np.array([6 / l, 3, -6 / l, 3])
     return b.dot(u)
 
@@ -35,17 +35,17 @@ class Boundary:
     def  boundary_conditions(self, k):
         if self.type == "clamped":
             #заделка, ограничивает все степени свободы
-            k[2 * self.number - 1][:] = 0 
-            k[:][2 * self.number -1] = 0
-            k[2 * self.number - 2][:] = 0
-            k[:][2 * self.number - 2] = 0 
-            k[2 * self.number - 1][2 * self.number - 1] = 1
-            k[2 * self.number - 2][2 * self.number - 2] = 1 
+            k[2 * self.number - 1, :] = 0 
+            k[:,2 * self.number -1] = 0
+            k[2 * self.number - 2, :] = 0
+            k[:,2 * self.number - 2] = 0 
+            k[2 * self.number - 1, 2 * self.number - 1] = 1
+            k[2 * self.number - 2, 2 * self.number - 2] = 1 
         elif self.type == "pinned":
             #шарнирная опора,ограничивает только перемещения, разрешает повороты
-            k[2 * self.number - 2][:] = 0
-            k[:][2 * self.number - 2] = 0 
-            k[2 * self.number - 2][2 * self.number - 2] = 1
+            k[2 * self.number - 2, :] = 0
+            k[:, 2 * self.number - 2] = 0 
+            k[2 * self.number - 2, 2 * self.number - 2] = 1
         return k
 
 class Forse:
@@ -68,30 +68,5 @@ def save_data(U, F,  M,  x):
     data_result = pd.DataFrame({'Coordinate, m' : x,   'Displacements Y, mm' : U, 'Forses, kN' : F, 'Moments kN*m': M})
     with pd.ExcelWriter(r"C:\Users\Alexander\source\Учеба\3 курс\Вычислительная механика\МКЭ\Finite_element_method\Euler–Bernoulli beam\Bending.xlsx") as writer:
         data_result.to_excel(writer, sheet_name ="Python", index = "False")
-
-   
-
-
-
-
-def J():
-    return 
-
-
-def mesh():
-    return
-
-
-
-
-g = 9.81 # ускорение свободного падения
-J = 7.87e-9 # момент инерции
-A = 144e-6 # Площадь поперечного сечения
-E = 2e11 # модуль упругости Юнга
-rho = 7900 # плотность (сталь)
-nodes_num = 21 # число узлов
-elements_num = nodes_num - 1 # число отрезков
-L = 1 # длина всей балки
-l = L / elements_num # длина конечных элементов балки
 
 
