@@ -15,6 +15,8 @@ E = 2e11
 #J = 1.63e-6#dvutavr
 J = 0.90625e-6 # tavr
 #J = 3.4e-6
+J = 3.75e-7
+
 
 # TODO: попробывать сделать автоматический выбор размера элемента
 #number of elements 
@@ -78,7 +80,7 @@ Moments =  np.round(Moments, 6)
 x *= 1000
 for i in range(element_numbers + 1):
     print(x[i],"   ",  Moments[i],"  ",  Forces[i], "  ", Displacements[i])
-#m.save_data(Displacements, Forces, Moments, x)
+m.save_data(Displacements, Forces, Moments, x)
 
 
 
@@ -112,36 +114,5 @@ plt.grid()
 plt.show()
 
 
-for i in range(element_numbers//2):
-    Displacements[i] += i * 2e-5
-    Displacements[-i] += i * 2e-5
-
-Displacements[element_numbers//2 + 1] += 0.0022
-
-plt.figure()
-plt.plot(x, Moments) 
-plt.xlabel("координата, мм")
-plt.ylabel("Момент, Н*м")
-plt.title("Abaqus")
-plt.grid()
-plt.show()
-
-
-plt.figure()
-plt.plot(x, Displacements * 1000) 
-plt.xlabel("координата, мм")
-plt.ylabel("перемещение, мм")
-plt.title("Abaqus")
-plt.grid()
-plt.show()
-
-
-plt.figure()
-plt.plot(x,Forces) 
-plt.xlabel("координата, мм")
-plt.ylabel("Сила, Н")
-plt.title("Abaqus")
-plt.grid()
-plt.show()
 
 J = 1
