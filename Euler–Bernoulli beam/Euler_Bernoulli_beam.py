@@ -1,6 +1,4 @@
-﻿from dis import dis
-from xml.dom.minidom import Element
-import matplotlib.pyplot as plt
+﻿import matplotlib.pyplot as plt
 import numpy as np
 import array
 import module1 as m
@@ -12,9 +10,7 @@ import module1 as m
 L = 1 # meter 
 M = 1e4
 E = 2e11
-#J = 1.63e-6#dvutavr
-J = 0.90625e-6 # tavr
-#J = 3.4e-6
+
 J = 3.75e-7
 
 
@@ -114,5 +110,3 @@ plt.grid()
 plt.show()
 
 
-
-J = 1

@@ -9,6 +9,8 @@ Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "tension-compression of elas
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Euler–Bernoulli beam", "Euler–Bernoulli beam\Euler–Bernoulli beam.pyproj", "{051E36AA-5675-4725-A004-CBAEA914A9F3}"
 EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "DynamicBending", "DynamicBending\DynamicBending.pyproj", "{9B4DA573-5822-4FF6-9BC7-6EA0199E77B7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,8 @@ Global
 		{985F2BF4-A753-48E4-88D8-09E6042C0E6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{051E36AA-5675-4725-A004-CBAEA914A9F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{051E36AA-5675-4725-A004-CBAEA914A9F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B4DA573-5822-4FF6-9BC7-6EA0199E77B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B4DA573-5822-4FF6-9BC7-6EA0199E77B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
