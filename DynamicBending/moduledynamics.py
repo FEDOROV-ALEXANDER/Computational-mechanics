@@ -87,11 +87,34 @@ class Forse:
     #тут в идеале добавить для распределнной нагрузки и мб еще что-то, пока хз
         return F
 
-def save_data(U, F,  M,  x): 
+def save_data(Deflections, Velocities,  Accelerations,  x): 
 
-    data_result = pd.DataFrame({'Координата, мм' : x,   'Перемещения, мм' : U * 1000, 'Усилия, Н' : F, 'Моменты, нМ': M})
-    with pd.ExcelWriter(r"C:\Users\Alexander\source\Учеба\3 курс\Вычислительная механика\МКЭ\Finite_element_method\Euler–Bernoulli beam\Bending.xlsx") as writer:
-        data_result.to_excel(writer, sheet_name ="Python", index = "False")
+    data_deflections = pd.DataFrame({'Координата, м' : x,   'zero' : Deflections[0][0::2], 'first' : Deflections[1][0::2], 
+                                'second': Deflections[2][0::2], 'third': Deflections[3][0::2]  ,
+                               'fourth' : Deflections[4][0::2],'fifth': Deflections[5][0::2],	'sixth': Deflections[6][0::2],	
+                               'seventh':	Deflections[7][0::2],'eighth':	Deflections[8][0::2],
+                               'ninth':	Deflections[9][0::2],'tenh': Deflections[10][0::2]})
+    
+        
+
+    data_velocities = pd.DataFrame({'Координата, м' : x,   'zero' : Velocities[0][0::2], 'first' : Velocities[1][0::2], 
+                                'second': Velocities[2][0::2], 'third': Velocities[3][0::2]  ,
+                               'fourth' : Velocities[4][0::2],'fifth': Velocities[5][0::2],	'sixth': Velocities[6][0::2],	
+                               'seventh':	Velocities[7][0::2],'eighth':	Velocities[8][0::2],
+                               'ninth':	Velocities[9][0::2],'tenh': Velocities[10][0::2]})
+    
+      
+
+    data_accelerations = pd.DataFrame({'Координата, м' : x,   'zero' : Accelerations[0][0::2], 'first' : Accelerations[1][0::2], 
+                                'second': Accelerations[2][0::2], 'third': Accelerations[3][0::2]  ,
+                               'fourth' : Accelerations[4][0::2],'fifth': Accelerations[5][0::2],	'sixth': Accelerations[6][0::2],	
+                               'seventh':	Accelerations[7][0::2],'eighth':	Accelerations[8][0::2],
+                               'ninth':	Accelerations[9][0::2],'tenh': Accelerations[10][0::2]})
+
+    with pd.ExcelWriter(r"C:\Users\Alexander\source\Studying\3 course\Computational mechanical\МКЭ\Finite_element_method\DynamicBending\Python.xlsx") as writer:
+        data_deflections.to_excel(writer, sheet_name ="Прогибы", index = "False")
+        data_velocities.to_excel(writer, sheet_name ="Скорости", index = "False")
+        data_accelerations.to_excel(writer, sheet_name ="Ускорения", index = "False")
 
 def plots(Deflections, Velocities, Accelerations, x):
     
