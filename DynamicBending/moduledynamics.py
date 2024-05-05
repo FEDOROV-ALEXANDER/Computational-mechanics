@@ -19,8 +19,8 @@ def implicit_method_solution(K, M, F, steps, t):
 
         deflections = Deflections[i-1, :] + dt * Velocities[i-1, :] + (0.5 - beta) * dt * dt * Accelerations[i-1, :]
         velocities = Velocities[i - 1, :] + (1 - gamma) * dt * Accelerations[i-1, :]
-        if(i <=int(steps / 2)):
-            accelerations = (np.linalg.inv(M + beta * (dt **2) * K)) @ (F * 2 * i / steps- K @ deflections)
+        if(i <=int(steps / 2 )):
+            accelerations = (np.linalg.inv(M + beta * (dt **2) * K)) @ (F * 2 * i / steps - K @ deflections)
         else:
             accelerations = (np.linalg.inv(M + beta * (dt **2) * K)) @ (- K @ deflections)
         deflections += (0.5 - beta) * dt * dt * accelerations

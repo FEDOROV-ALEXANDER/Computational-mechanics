@@ -63,7 +63,7 @@ Deflections, Velocities, Accelerations = md.implicit_method_solution(K, M, F, st
 x = np.linspace(0, 1, element_numbers + 1)
 md.plots(Deflections, Velocities, Accelerations, x)
 md.save_data(Deflections, Velocities,  Accelerations,  x)
-print("хуй")
+
 
 
 
