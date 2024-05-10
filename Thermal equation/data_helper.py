@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-#В этом файле я просто пробывал как считывать с файла значения
+#пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 def input(file_name):
 	transcalency1 = found_string('*Material, name=B20', file_name) +1
 	transcalency2 = found_string('*Material, name=B30', file_name) +1
