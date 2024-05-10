@@ -2,22 +2,28 @@
 import pandas as pd
 from openpyxl.workbook import Workbook
 import meshio
+import data_helper as dh
 T_water = 5
 T_air = 25
-transcalency1 = 1.5
-transcalency2 = 1.75
+#transcalency1 = 1.5
+#transcalency2 = 1.75
 
-elements = np.loadtxt("elements.txt", dtype=int, comments="#", delimiter=",", 
-unpack=False)
-nodes = np.loadtxt("nodes.txt", dtype=float, comments="#", delimiter=",", 
-unpack=False)
-nodes_water = np.loadtxt("nodes_water.txt", dtype=int, comments="#", 
-delimiter=",", unpack=False)
-nodes_air = np.loadtxt("nodes_air.txt", dtype=int, comments="#", delimiter=",", 
-unpack=False)
+#elements = np.loadtxt("elements.txt", dtype=int, comments="#", delimiter=",", 
+#unpack=False)
+#nodes = np.loadtxt("nodes.txt", dtype=float, comments="#", delimiter=",", 
+#unpack=False)
+#nodes_water = np.loadtxt("nodes_water.txt", dtype=int, comments="#", 
+#delimiter=",", unpack=False)
+#nodes_air = np.loadtxt("nodes_air.txt", dtype=int, comments="#", delimiter=",", 
+#unpack=False)
 
-elements1 = np.arange(1, 103, 1)
-elements2 = np.arange(104, 160, 1)
+
+
+nodes, elements, nodes_air, nodes_water,indexes1, indexes2, transcalency1, transcalency2= dh.input("Thermal.inp")
+
+
+elements1 = np.arange(indexes1(0), indexes1(1), indexes1(2))
+elements2 = np.arange(indexes2(0), indexes2(1), indexes2(2))
 
 materials = {
  "array": [elements1, elements2],
@@ -60,3 +66,8 @@ T = np.linalg.solve(K, R)
 df = pd.DataFrame(T)
 df.to_excel('T.xlsx', index=False)
 nod = nodes[np.ix_(np.arange(0, n_nod, 1), np.arange(1, 3, 1))]
+element = elements[np.ix_(np.arange(0, n_el, 1), np.arange(1, 4, 1))] - 1
+cells = [('triangle', np.array(element))]
+point_data = {"temperature": T.reshape(-1,1)}
+mesh = meshio.Mesh(nod, cells, point_data=point_data)
+meshio.write('temp.vtk', mesh, file_format ='vtk')

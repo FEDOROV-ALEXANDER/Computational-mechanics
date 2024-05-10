@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>02cd824d-73f0-4147-956c-acfcf929cfd8</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Thermal_equation.py</StartupFile>
+    <StartupFile>data_helper.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
