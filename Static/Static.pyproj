@@ -2,15 +2,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>02cd824d-73f0-4147-956c-acfcf929cfd8</ProjectGuid>
+    <ProjectGuid>1ffaf321-7e4d-4791-b226-5d2ddacd10d7</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>data_helper.py</StartupFile>
+    <StartupFile>Static.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
-    <Name>Thermal equation</Name>
-    <RootNamespace>Thermal equation</RootNamespace>
+    <Name>Static</Name>
+    <RootNamespace>Static</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,8 +21,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="data_helper.py" />
-    <Compile Include="Thermal_equation.py" />
+    <Compile Include="Static.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

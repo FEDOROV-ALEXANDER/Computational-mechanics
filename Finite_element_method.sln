@@ -13,6 +13,8 @@ Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "DynamicBending", "DynamicBe
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Thermal equation", "Thermal equation\Thermal equation.pyproj", "{02CD824D-73F0-4147-956C-ACFCF929CFD8}"
 EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Static", "Static\Static.pyproj", "{1FFAF321-7E4D-4791-B226-5D2DDACD10D7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,8 @@ Global
 		{9B4DA573-5822-4FF6-9BC7-6EA0199E77B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02CD824D-73F0-4147-956C-ACFCF929CFD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{02CD824D-73F0-4147-956C-ACFCF929CFD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FFAF321-7E4D-4791-B226-5D2DDACD10D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FFAF321-7E4D-4791-B226-5D2DDACD10D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
